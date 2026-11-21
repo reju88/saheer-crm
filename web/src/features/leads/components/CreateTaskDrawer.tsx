@@ -113,7 +113,7 @@ export function CreateTaskDrawer({ open, onClose, leadName = 'General', leadId, 
         }`}
         aria-hidden={!open}
       >
-        <div className="relative overflow-hidden border-b border-slate-200/80 bg-white px-6 py-5">
+        <div className="relative overflow-hidden border-b border-slate-200/80 bg-white px-4 py-4 sm:px-6 sm:py-5">
           <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[var(--color-brand)] via-fuchsia-400 to-cyan-400" />
           <div className="flex items-start justify-between gap-4">
             <div className="flex items-start gap-3">
@@ -177,7 +177,7 @@ export function CreateTaskDrawer({ open, onClose, leadName = 'General', leadId, 
         >
           <div
             className={cn(
-              'min-h-0 flex-1 overscroll-contain px-6 py-5',
+              'min-h-0 flex-1 overscroll-contain px-4 py-4 sm:px-6 sm:py-5',
               typeOpen || participantOpen ? 'overflow-visible' : 'overflow-y-auto',
             )}
           >
@@ -463,7 +463,7 @@ export function CreateTaskDrawer({ open, onClose, leadName = 'General', leadId, 
             </button>
             <button
               type="submit"
-              className="flex flex-[1.4] items-center justify-center gap-2 rounded-xl bg-[var(--color-brand)] px-4 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_-12px_rgba(233,30,140,0.75)] transition hover:bg-[var(--color-brand-hover)]"
+              className="flex flex-[1.4] items-center justify-center gap-2 rounded-xl bg-[var(--color-brand)] px-4 py-3 text-sm font-semibold text-white shadow-[0_14px_28px_-12px_rgba(0,15,159,0.75)] transition hover:bg-[var(--color-brand-hover)]"
             >
               <ListTodo className="size-4" strokeWidth={2.2} />
               {isEdit ? 'Save changes' : 'Submit'}

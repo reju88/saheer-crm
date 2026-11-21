@@ -49,7 +49,7 @@ export function TeamPage() {
     <div className="space-y-4">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-slate-900">Team</h1>
+          <h1 className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">Team</h1>
           <p className="mt-1 text-sm text-slate-500">Employees, roles, assignment, and workload.</p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -70,7 +70,7 @@ export function TeamPage() {
           <button
             type="button"
             onClick={() => setDrawer({ open: true, member: null })}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-[var(--color-brand)] px-3.5 py-2 text-sm font-semibold text-white shadow-[0_10px_20px_-12px_rgba(233,30,140,0.7)] hover:bg-[var(--color-brand-hover)]"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-[var(--color-brand)] px-3.5 py-2 text-sm font-semibold text-white shadow-[0_10px_20px_-12px_rgba(0,15,159,0.7)] hover:bg-[var(--color-brand-hover)]"
           >
             <Plus className="size-4" strokeWidth={2.2} /> New member
           </button>

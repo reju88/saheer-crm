@@ -93,7 +93,7 @@ export function SalesPage() {
     <div className="flex h-full min-h-full flex-col gap-4">
       <div className="flex shrink-0 flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-slate-900">
+          <h1 className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
             Sales
           </h1>
           <p className="mt-1 text-sm text-slate-500">
@@ -103,7 +103,7 @@ export function SalesPage() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="inline-flex items-center gap-1.5 rounded-lg bg-[var(--color-brand)] px-3.5 py-2 text-sm font-semibold text-white shadow-[0_10px_20px_-12px_rgba(233,30,140,0.7)] hover:bg-[var(--color-brand-hover)]"
+          className="inline-flex items-center gap-1.5 rounded-lg bg-[var(--color-brand)] px-3.5 py-2 text-sm font-semibold text-white shadow-[0_10px_20px_-12px_rgba(0,15,159,0.7)] hover:bg-[var(--color-brand-hover)]"
         >
           <Plus className="size-4" strokeWidth={2.2} />
           New deal
@@ -134,7 +134,7 @@ export function SalesPage() {
         ))}
       </div>
 
-      <div className="grid min-h-0 flex-1 gap-3 overflow-x-auto pb-2 [grid-template-columns:repeat(5,minmax(240px,1fr))]">
+      <div className="grid min-h-0 flex-1 gap-3 overflow-x-auto overscroll-x-contain pb-2 [-webkit-overflow-scrolling:touch] [grid-template-columns:repeat(5,minmax(220px,1fr))]">
         {stats.map((s) => {
           const isOver = overStage === s.stage
           return (

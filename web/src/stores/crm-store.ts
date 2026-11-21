@@ -144,7 +144,7 @@ export const useCrmStore = create<CrmState>((set, get) => ({
   notes: { ...demoNotes },
   attachments: { ...demoAttachments },
   settings: {
-    companyName: 'CEZCON',
+    companyName: 'Starline Training Institute LLC',
     timezone: 'Asia/Dubai',
     currency: 'AED',
     leadAutoAssign: true,

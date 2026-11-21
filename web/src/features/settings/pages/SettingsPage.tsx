@@ -29,7 +29,7 @@ export function SettingsPage() {
   return (
     <div className="space-y-4">
       <div>
-        <h1 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-slate-900">Settings</h1>
+        <h1 className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">Settings</h1>
         <p className="mt-1 text-sm text-slate-500">Company preferences, notifications, and your account.</p>
       </div>
 
@@ -88,7 +88,7 @@ export function SettingsPage() {
 
           <button
             type="submit"
-            className="inline-flex items-center gap-2 rounded-xl bg-[var(--color-brand)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_14px_28px_-12px_rgba(233,30,140,0.75)] hover:bg-[var(--color-brand-hover)]"
+            className="inline-flex items-center gap-2 rounded-xl bg-[var(--color-brand)] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_14px_28px_-12px_rgba(0,15,159,0.75)] hover:bg-[var(--color-brand-hover)]"
           >
             <Save className="size-4" /> Save settings
           </button>
@@ -100,7 +100,7 @@ export function SettingsPage() {
               <span className="grid size-12 place-items-center rounded-full bg-[var(--color-brand)] font-[family-name:var(--font-display)] text-lg font-semibold text-white">A</span>
               <div>
                 <p className="font-semibold text-slate-900">Admin</p>
-                <p className="text-xs text-slate-500">CEZCON</p>
+                <p className="text-xs text-slate-500">Starline</p>
               </div>
               <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-pink-50 px-2.5 py-0.5 text-[11px] font-semibold text-pink-700 ring-1 ring-pink-100">
                 <ShieldCheck className="size-3" /> Admin

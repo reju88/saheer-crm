@@ -117,7 +117,7 @@ export function ReportsPage() {
     <div className="flex h-full min-h-full flex-col gap-5">
       <div className="flex shrink-0 flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-slate-900">
+          <h1 className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
             Reports
           </h1>
           <p className="mt-1 text-sm text-slate-500">Live analytics from your CRM workspace.</p>
@@ -189,7 +189,7 @@ export function ReportsPage() {
         {/* Customers */}
         <section className="flex flex-col rounded-2xl border border-slate-200/90 bg-white p-5 shadow-[0_10px_30px_-22px_rgba(10,22,40,0.45)] xl:col-span-4">
           <Header title="Customers" subtitle="Account health" onOpen={() => navigate('/customers')} />
-          <div className="mt-5 grid flex-1 grid-cols-3 gap-2">
+          <div className="mt-5 grid flex-1 grid-cols-2 gap-2 sm:grid-cols-3">
             {data.customerRows.map((r) => (
               <div
                 key={r.label}

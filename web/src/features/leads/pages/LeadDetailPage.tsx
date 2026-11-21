@@ -55,7 +55,7 @@ export function LeadDetailPage() {
             Back to leads
           </Link>
           <div className="flex flex-wrap items-center gap-2.5">
-            <h1 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-slate-900">
+            <h1 className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
               {lead.contactName}
             </h1>
             <RatingBadge rating={lead.rating} />

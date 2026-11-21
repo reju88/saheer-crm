@@ -56,7 +56,7 @@ export function CustomerDetailPage() {
             Back to customers
           </Link>
           <div className="flex flex-wrap items-center gap-2.5">
-            <h1 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-slate-900">
+            <h1 className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
               {customer.name}
             </h1>
             <CustomerTierBadge tier={customer.tier} />

@@ -5,6 +5,7 @@ import {
   FileChartColumn,
   LayoutDashboard,
   LogOut,
+  Menu,
   PanelLeftClose,
   PanelLeftOpen,
   Search,
@@ -13,9 +14,10 @@ import {
   TrendingUp,
   Users,
   UserRound,
+  X,
 } from 'lucide-react'
-import { Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
-import logo from '@/assets/logo.png'
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom'
+import logo from '@/assets/logo.svg'
 import { AppBreadcrumb } from '@/shared/components/AppBreadcrumb'
 import { cn } from '@/shared/utils/cn'
 import { useAuthStore } from '@/stores/auth-store'
@@ -35,8 +37,11 @@ const navItems = [
 
 export function AppLayout() {
   const navigate = useNavigate()
+  const location = useLocation()
   const sidebarCollapsed = useUiStore((s) => s.sidebarCollapsed)
   const toggleSidebar = useUiStore((s) => s.toggleSidebar)
+  const mobileNavOpen = useUiStore((s) => s.mobileNavOpen)
+  const setMobileNavOpen = useUiStore((s) => s.setMobileNavOpen)
   const notificationsOpen = useUiStore((s) => s.notificationsOpen)
   const setNotificationsOpen = useUiStore((s) => s.setNotificationsOpen)
   const user = useAuthStore((s) => s.user)
@@ -51,6 +56,9 @@ export function AppLayout() {
 
   const [query, setQuery] = useState('')
   const [searchOpen, setSearchOpen] = useState(false)
+  const [isMd, setIsMd] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(min-width: 768px)').matches : true,
+  )
   const searchRef = useRef<HTMLDivElement>(null)
   const notifRef = useRef<HTMLDivElement>(null)
   const sidebarWidth = sidebarCollapsed ? 64 : 224
@@ -62,6 +70,7 @@ export function AppLayout() {
     .join('')
     .slice(0, 2)
     .toUpperCase()
+  const showNavLabels = !isMd || !sidebarCollapsed
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -82,6 +91,21 @@ export function AppLayout() {
   }, [query, leads, customers, tasks])
 
   useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    const sync = () => {
+      setIsMd(mq.matches)
+      if (mq.matches) setMobileNavOpen(false)
+    }
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [setMobileNavOpen])
+
+  useEffect(() => {
+    setMobileNavOpen(false)
+  }, [location.pathname, setMobileNavOpen])
+
+  useEffect(() => {
     const onDoc = (e: MouseEvent) => {
       if (!searchRef.current?.contains(e.target as Node)) setSearchOpen(false)
       if (!notifRef.current?.contains(e.target as Node)) setNotificationsOpen(false)
@@ -90,19 +114,60 @@ export function AppLayout() {
     return () => document.removeEventListener('mousedown', onDoc)
   }, [setNotificationsOpen])
 
+  useEffect(() => {
+    if (!mobileNavOpen || isMd) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = prev
+    }
+  }, [mobileNavOpen, isMd])
+
   return (
     <div className="h-dvh overflow-hidden bg-[var(--color-bg)]">
+      {mobileNavOpen && !isMd ? (
+        <button
+          type="button"
+          aria-label="Close menu"
+          className="fixed inset-0 z-30 bg-slate-950/50 backdrop-blur-[1px] md:hidden"
+          onClick={() => setMobileNavOpen(false)}
+        />
+      ) : null}
+
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-30 flex flex-col border-r border-white/5 bg-[var(--color-sidebar)] text-slate-100 transition-[width] duration-200',
-          sidebarCollapsed ? 'w-16' : 'w-56',
+          'fixed inset-y-0 left-0 z-40 flex w-56 flex-col border-r border-white/5 bg-[var(--color-sidebar)] text-slate-100 transition-[transform,width] duration-200',
+          mobileNavOpen ? 'translate-x-0' : '-translate-x-full',
+          'md:translate-x-0',
+          sidebarCollapsed ? 'md:w-16' : 'md:w-56',
         )}
       >
-        <div className={cn('flex h-14 items-center border-b border-white/10', sidebarCollapsed ? 'justify-center px-2' : 'px-3')}>
-          {sidebarCollapsed ? (
-            <img src={logo} alt="CEZCON" className="h-7 w-7 rounded-md object-cover object-left" />
+        <div
+          className={cn(
+            'flex h-14 items-center border-b border-white/10',
+            isMd && sidebarCollapsed ? 'justify-center px-2' : 'px-3',
+          )}
+        >
+          {isMd && sidebarCollapsed ? (
+            <div className="rounded-md bg-white p-1">
+              <img src={logo} alt="Starline" className="h-6 w-6 object-cover object-left" />
+            </div>
           ) : (
-            <img src={logo} alt="CEZCON CRM" className="h-7 w-auto max-w-[168px] object-contain object-left" />
+            <div className="flex w-full items-center justify-between gap-2">
+              <div className="rounded-lg bg-white px-2.5 py-1.5">
+                <img src={logo} alt="Starline" className="h-7 w-auto max-w-[148px] object-contain object-left" />
+              </div>
+              {!isMd ? (
+                <button
+                  type="button"
+                  onClick={() => setMobileNavOpen(false)}
+                  className="grid size-9 place-items-center rounded-lg text-slate-300 hover:bg-white/10 hover:text-white"
+                  aria-label="Close menu"
+                >
+                  <X className="size-4" strokeWidth={1.9} />
+                </button>
+              ) : null}
+            </div>
           )}
         </div>
 
@@ -117,16 +182,16 @@ export function AppLayout() {
                 title={item.label}
                 className={({ isActive }) =>
                   cn(
-                    'group flex items-center gap-3 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors',
-                    sidebarCollapsed && 'justify-center px-0',
+                    'group flex items-center gap-3 rounded-lg px-2.5 py-2.5 text-sm font-medium transition-colors md:py-2',
+                    isMd && sidebarCollapsed && 'justify-center px-0',
                     isActive
-                      ? 'bg-[var(--color-brand)] text-white shadow-sm shadow-pink-900/20'
+                      ? 'bg-[var(--color-brand)] text-white shadow-sm shadow-blue-950/30'
                       : 'text-slate-300 hover:bg-white/10 hover:text-white',
                   )
                 }
               >
                 <Icon className="size-[18px] shrink-0 opacity-90" strokeWidth={1.85} />
-                {!sidebarCollapsed ? <span className="truncate">{item.label}</span> : null}
+                {showNavLabels ? <span className="truncate">{item.label}</span> : null}
               </NavLink>
             )
           })}
@@ -141,28 +206,38 @@ export function AppLayout() {
             }}
             title="Sign out"
             className={cn(
-              'flex w-full items-center gap-3 rounded-lg px-2.5 py-2 text-sm text-slate-400 transition hover:bg-white/10 hover:text-white',
-              sidebarCollapsed && 'justify-center px-0',
+              'flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-sm text-slate-400 transition hover:bg-white/10 hover:text-white md:py-2',
+              isMd && sidebarCollapsed && 'justify-center px-0',
             )}
           >
             <LogOut className="size-[18px] shrink-0" strokeWidth={1.85} />
-            {!sidebarCollapsed ? <span>Sign out</span> : null}
+            {showNavLabels ? <span>Sign out</span> : null}
           </button>
         </div>
       </aside>
 
-      <div className="flex h-dvh flex-col transition-[padding] duration-200" style={{ paddingLeft: sidebarWidth }}>
-        <header className="z-20 flex h-14 shrink-0 items-center gap-3 border-b border-slate-200/80 bg-white/90 px-4 backdrop-blur-md">
+      <div
+        className="flex h-dvh flex-col transition-[padding] duration-200"
+        style={{ paddingLeft: isMd ? sidebarWidth : 0 }}
+      >
+        <header className="z-20 flex h-14 shrink-0 items-center gap-2 border-b border-slate-200/80 bg-white/90 px-3 backdrop-blur-md sm:gap-3 sm:px-4">
           <button
             type="button"
-            onClick={toggleSidebar}
+            onClick={() => {
+              if (isMd) toggleSidebar()
+              else setMobileNavOpen(!mobileNavOpen)
+            }}
             className="grid size-9 shrink-0 place-items-center rounded-lg border border-slate-200 text-slate-600 transition hover:bg-slate-50 hover:text-slate-900"
-            aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            aria-label={isMd ? (sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar') : 'Open menu'}
           >
-            {sidebarCollapsed ? (
-              <PanelLeftOpen className="size-4" strokeWidth={1.9} />
+            {isMd ? (
+              sidebarCollapsed ? (
+                <PanelLeftOpen className="size-4" strokeWidth={1.9} />
+              ) : (
+                <PanelLeftClose className="size-4" strokeWidth={1.9} />
+              )
             ) : (
-              <PanelLeftClose className="size-4" strokeWidth={1.9} />
+              <Menu className="size-4" strokeWidth={1.9} />
             )}
           </button>
 
@@ -170,11 +245,11 @@ export function AppLayout() {
             <AppBreadcrumb />
           </div>
 
-          <div ref={searchRef} className="relative hidden w-full max-w-xs lg:block">
+          <div ref={searchRef} className="relative min-w-0 max-w-[9.5rem] flex-1 sm:max-w-[11rem] md:max-w-xs">
             <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-slate-400" strokeWidth={1.9} />
             <input
               className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2 pr-3 pl-9 text-sm outline-none transition focus:border-[var(--color-accent)] focus:bg-white"
-              placeholder="Search leads, customers…"
+              placeholder="Search…"
               type="search"
               value={query}
               onChange={(e) => {
@@ -223,7 +298,7 @@ export function AppLayout() {
             </button>
 
             {notificationsOpen ? (
-              <div className="absolute top-full right-0 z-50 mt-2 w-80 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl">
+              <div className="absolute top-full right-0 z-50 mt-2 w-[min(20rem,calc(100vw-1.25rem))] overflow-hidden rounded-xl border border-slate-200 bg-white shadow-xl">
                 <div className="flex items-center justify-between border-b border-slate-100 px-3 py-2.5">
                   <p className="text-sm font-semibold text-slate-900">Notifications</p>
                   <button
@@ -261,10 +336,10 @@ export function AppLayout() {
             ) : null}
           </div>
 
-          <Link to="/settings" className="flex items-center gap-2 border-l border-slate-200 pl-3">
+          <Link to="/settings" className="flex items-center gap-2 border-l border-slate-200 pl-2 sm:pl-3">
             <div className="hidden text-right sm:block">
               <p className="text-xs font-semibold text-slate-800">{displayName}</p>
-              <p className="text-[11px] text-slate-400">{settings.companyName}</p>
+              <p className="max-w-[9rem] truncate text-[11px] text-slate-400">{settings.companyName}</p>
             </div>
             <div className="grid size-9 place-items-center rounded-full bg-[var(--color-brand)]/10 text-xs font-bold text-[var(--color-brand)]">
               {initials}
@@ -272,7 +347,7 @@ export function AppLayout() {
           </Link>
         </header>
 
-        <main className="min-h-0 flex-1 overflow-hidden p-4 md:p-6">
+        <main className="min-h-0 flex-1 overflow-hidden p-3 sm:p-4 md:p-6">
           <div className="h-full min-h-0 overflow-auto">
             <Outlet />
           </div>

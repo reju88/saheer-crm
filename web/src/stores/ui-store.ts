@@ -31,6 +31,8 @@ export type AppDialog = ConfirmDialog | PromptDialog
 type UiState = {
   sidebarCollapsed: boolean
   toggleSidebar: () => void
+  mobileNavOpen: boolean
+  setMobileNavOpen: (open: boolean) => void
   toasts: Toast[]
   pushToast: (toast: Omit<Toast, 'id'>) => void
   dismissToast: (id: string) => void
@@ -44,6 +46,8 @@ type UiState = {
 export const useUiStore = create<UiState>((set) => ({
   sidebarCollapsed: false,
   toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
+  mobileNavOpen: false,
+  setMobileNavOpen: (open) => set({ mobileNavOpen: open }),
   toasts: [],
   pushToast: (toast) => {
     const id = `toast_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`

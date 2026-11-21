@@ -99,7 +99,7 @@ export function LeadsPage() {
     <div className="flex h-full min-h-full flex-col gap-4">
       <div className="flex shrink-0 flex-wrap items-end justify-between gap-3">
         <div>
-          <h1 className="font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-slate-900">
+          <h1 className="font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
             Leads
           </h1>
           <p className="mt-1 text-sm text-slate-500">Track pipeline health and jump into lead records.</p>
@@ -107,7 +107,7 @@ export function LeadsPage() {
         <button
           type="button"
           onClick={() => setDrawerOpen(true)}
-          className="inline-flex items-center gap-1.5 rounded-lg bg-[var(--color-brand)] px-3.5 py-2 text-sm font-semibold text-white shadow-[0_10px_20px_-12px_rgba(233,30,140,0.7)] hover:bg-[var(--color-brand-hover)]"
+          className="inline-flex items-center gap-1.5 rounded-lg bg-[var(--color-brand)] px-3.5 py-2 text-sm font-semibold text-white shadow-[0_10px_20px_-12px_rgba(0,15,159,0.7)] hover:bg-[var(--color-brand-hover)]"
         >
           <Plus className="size-4" strokeWidth={2.2} />
           New lead
@@ -124,7 +124,7 @@ export function LeadsPage() {
 
       <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_10px_30px_-22px_rgba(10,22,40,0.45)]">
         <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-slate-100 px-4 py-3">
-          <div className="relative w-full max-w-[220px] sm:w-[220px]">
+          <div className="relative w-full sm:max-w-[220px] sm:w-[220px]">
             <Search className="pointer-events-none absolute top-1/2 left-2.5 size-3.5 -translate-y-1/2 text-slate-400" />
             <input
               className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2 pr-3 pl-8 text-sm outline-none focus:border-[var(--color-accent)] focus:bg-white"
@@ -330,7 +330,7 @@ function FilterSelect({
   const active = value !== 'all'
 
   return (
-    <label className="relative inline-flex min-w-[140px] items-center">
+    <label className="relative inline-flex min-w-0 flex-1 items-center sm:min-w-[140px] sm:flex-none">
       <span className="pointer-events-none absolute top-1/2 left-2.5 z-10 -translate-y-1/2 text-slate-400">
         <Icon className="size-3.5" strokeWidth={2} />
       </span>

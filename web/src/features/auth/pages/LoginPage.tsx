@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Lock, TrendingUp, UserRound, Users } from 'lucide-react'
-import logo from '@/assets/logo.png'
+import logo from '@/assets/logo.svg'
 import { useAuthStore } from '@/stores/auth-store'
 import { useCrmStore } from '@/stores/crm-store'
 import { cn } from '@/shared/utils/cn'
@@ -39,11 +39,11 @@ export function LoginPage() {
   return (
     <div className="flex h-dvh w-full flex-col lg:flex-row">
       <section className="relative hidden w-[56%] shrink-0 overflow-hidden text-white lg:flex">
-        <div className="absolute inset-0 bg-[#071422]" />
-        <div className="absolute inset-0 bg-[linear-gradient(125deg,rgba(14,143,155,0.4)_0%,transparent_42%,rgba(233,30,140,0.22)_100%)]" />
-        <div className="animate-glow absolute -left-24 top-1/4 size-[420px] rounded-full bg-cyan-500/25 blur-3xl" />
+        <div className="absolute inset-0 bg-[#00061f]" />
+        <div className="absolute inset-0 bg-[linear-gradient(125deg,rgba(0,15,159,0.55)_0%,transparent_42%,rgba(235,67,36,0.28)_100%)]" />
+        <div className="animate-glow absolute -left-24 top-1/4 size-[420px] rounded-full bg-[var(--color-brand)]/30 blur-3xl" />
         <div
-          className="animate-glow absolute -right-16 bottom-10 size-[320px] rounded-full bg-[var(--color-brand)]/25 blur-3xl"
+          className="animate-glow absolute -right-16 bottom-10 size-[320px] rounded-full bg-[var(--color-accent)]/25 blur-3xl"
           style={{ animationDelay: '1.5s' }}
         />
 
@@ -51,8 +51,8 @@ export function LoginPage() {
           <div className="w-full max-w-xl">
             <img
               src={logo}
-              alt="CEZCON CRM"
-              className="animate-fade mx-auto h-11 w-auto object-contain"
+              alt="Starline"
+              className="animate-fade mx-auto h-14 w-auto rounded-xl bg-white px-4 py-2.5 object-contain"
             />
 
             <div className="animate-rise mt-10 text-center" style={{ animationDelay: '0.08s' }}>
@@ -73,7 +73,7 @@ export function LoginPage() {
                   className="animate-rise flex items-center gap-2.5 rounded-xl border border-white/10 bg-white/5 px-3.5 py-3 backdrop-blur-md transition hover:border-white/20 hover:bg-white/10"
                   style={{ animationDelay: `${0.14 + i * 0.05}s` }}
                 >
-                  <span className="size-2 shrink-0 rounded-full bg-[var(--color-brand)] shadow-[0_0_10px_rgba(233,30,140,0.7)]" />
+                  <span className="size-2 shrink-0 rounded-full bg-[var(--color-accent)] shadow-[0_0_10px_rgba(235,67,36,0.7)]" />
                   <span className="text-left text-[13px] font-medium leading-snug text-white">{title}</span>
                 </li>
               ))}
@@ -108,10 +108,10 @@ export function LoginPage() {
               >
                 <div className="mb-4 flex items-center justify-between">
                   <span className="inline-flex items-center gap-2 text-sm font-semibold text-white">
-                    <TrendingUp className="size-4 text-cyan-300" strokeWidth={2} />
+                    <TrendingUp className="size-4 text-orange-300" strokeWidth={2} />
                     Sales pipeline
                   </span>
-                  <span className="rounded-full bg-cyan-400/15 px-2.5 py-0.5 text-xs font-bold text-cyan-200">
+                  <span className="rounded-full bg-[var(--color-accent)]/15 px-2.5 py-0.5 text-xs font-bold text-orange-200">
                     AED {pipelineLabel}
                   </span>
                 </div>
@@ -119,7 +119,7 @@ export function LoginPage() {
                   {barHeights.map((h, i) => (
                     <div
                       key={i}
-                      className="animate-bar-up w-7 rounded-t-md bg-gradient-to-t from-[var(--color-brand)] to-cyan-300 shadow-[0_0_12px_rgba(14,143,155,0.25)] sm:w-8"
+                      className="animate-bar-up w-7 rounded-t-md bg-gradient-to-t from-[var(--color-brand)] to-[var(--color-accent)] shadow-[0_0_12px_rgba(0,15,159,0.25)] sm:w-8"
                       style={{ height: `${h}%`, animationDelay: `${0.7 + i * 0.05}s` }}
                     />
                   ))}
@@ -130,20 +130,20 @@ export function LoginPage() {
         </div>
       </section>
 
-      <section className="relative flex min-h-dvh flex-1 items-center justify-center bg-[#eef2f7] px-6 py-10 lg:min-h-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(233,30,140,0.06),transparent_50%)]" />
+      <section className="relative flex min-h-0 flex-1 items-center justify-center overflow-y-auto bg-[#eef2f7] px-4 py-8 sm:px-6 sm:py-10 lg:min-h-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(0,15,159,0.06),transparent_50%)]" />
 
         <div className="animate-rise relative w-full max-w-[400px]" style={{ animationDelay: '0.12s' }}>
           <div className="mb-6 flex justify-center lg:hidden">
-            <div className="rounded-2xl bg-[#071422] px-5 py-3">
-              <img src={logo} alt="CEZCON CRM" className="h-10 w-auto object-contain" />
+            <div className="rounded-2xl bg-white px-5 py-3 shadow-sm ring-1 ring-slate-200">
+              <img src={logo} alt="Starline" className="h-10 w-auto object-contain" />
             </div>
           </div>
 
-          <div className="rounded-3xl bg-white p-8 shadow-[0_30px_80px_-40px_rgba(7,20,34,0.55)]">
+          <div className="rounded-3xl bg-white p-6 shadow-[0_30px_80px_-40px_rgba(7,20,34,0.55)] sm:p-8">
             <div className="mb-7 text-center">
               <p className="font-[family-name:var(--font-display)] text-2xl font-semibold text-slate-900">Sign In</p>
-              <p className="mt-1 text-sm text-slate-500">Access your CEZCON CRM workspace</p>
+              <p className="mt-1 text-sm text-slate-500">Access your Starline CRM workspace</p>
             </div>
 
             <form
@@ -209,7 +209,7 @@ export function LoginPage() {
 
               <button
                 type="submit"
-                className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--color-brand)] py-3.5 text-sm font-semibold text-white shadow-[0_14px_28px_-12px_rgba(233,30,140,0.75)] transition hover:scale-[1.01] hover:bg-[var(--color-brand-hover)] active:scale-[0.99]"
+                className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--color-brand)] py-3.5 text-sm font-semibold text-white shadow-[0_14px_28px_-12px_rgba(0,15,159,0.75)] transition hover:scale-[1.01] hover:bg-[var(--color-brand-hover)] active:scale-[0.99]"
               >
                 Sign In
                 <span aria-hidden>→</span>
@@ -259,7 +259,7 @@ function MetricCard({
         <div className="mt-2.5 flex flex-col items-center gap-2">
           <div
             className="relative grid size-12 place-items-center rounded-full"
-            style={{ background: `conic-gradient(#e91e8c 0 ${ring}%, #e5e7eb ${ring}% 100%)` }}
+            style={{ background: `conic-gradient(#000f9f 0 ${ring}%, #e5e7eb ${ring}% 100%)` }}
           >
             <div className="grid size-8 place-items-center rounded-full bg-white">
               <Users className="size-3.5 text-[var(--color-brand)]" strokeWidth={2.2} />
@@ -278,7 +278,7 @@ function MetricCard({
       {bar != null ? (
         <div className="mx-auto mt-2.5 h-1.5 w-full max-w-[5.5rem] overflow-hidden rounded-full bg-slate-100">
           <div
-            className="animate-bar h-full rounded-full bg-cyan-500"
+            className="animate-bar h-full rounded-full bg-[var(--color-accent)]"
             style={{ width: `${Math.min(100, Math.max(8, bar))}%`, animationDelay: `${delay + 0.2}s` }}
           />
         </div>

@@ -39,7 +39,7 @@ export function StatCard({
       style={{ animationDelay: `${delay}s` }}
     >
       <p className="text-xs font-semibold tracking-wide text-slate-500 uppercase">{label}</p>
-      <p className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold tracking-tight text-slate-900">
+      <p className="mt-2 font-[family-name:var(--font-display)] text-xl font-semibold tracking-tight text-slate-900 sm:text-2xl">
         {value}
       </p>
       {hint ? <p className="mt-1 text-xs font-medium text-[var(--color-success)]">{hint}</p> : null}
