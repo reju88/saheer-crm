@@ -13,7 +13,7 @@ import { SettingsPage } from '@/features/settings'
 
 export function AppRouter() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '') || undefined}>
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<LoginPage />} />
