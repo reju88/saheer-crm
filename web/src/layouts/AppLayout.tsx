@@ -291,7 +291,7 @@ export function AppLayout() {
             >
               <Bell className="size-4" strokeWidth={1.9} />
               {unread > 0 ? (
-                <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--color-brand)] px-1 text-[9px] leading-none font-bold text-white">
+                <span className="absolute -top-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--color-accent)] px-1 text-[9px] leading-none font-bold text-white">
                   {unread}
                 </span>
               ) : null}

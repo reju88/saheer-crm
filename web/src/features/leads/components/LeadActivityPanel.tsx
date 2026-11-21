@@ -57,7 +57,7 @@ export function LeadActivityPanel({ leadId, leadName, onAddTask }: LeadActivityP
                 <span
                   className={cn(
                     'flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[10px] leading-none font-bold',
-                    active ? 'bg-[var(--color-brand)] text-white' : 'bg-slate-200 text-slate-600',
+                    active ? 'bg-[var(--color-accent)] text-white' : 'bg-slate-200 text-slate-600',
                   )}
                 >
                   {count}
